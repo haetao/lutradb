@@ -1,5 +1,5 @@
-// Generated from C:/workspace/lutradb/lutra-sql/src/main/resources/antlr4\MySqlLangRule.g4 by ANTLR 4.8
-package antlr4;
+// Generated from C:/workspace/lutradb/lutra-sql/src/main/resources/antlr4\DmlLangRule.g4 by ANTLR 4.8
+package io.lutra.antlr4;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
@@ -10,7 +10,7 @@ import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class MySqlLangRuleLexer extends Lexer {
+public class DmlLangRuleLexer extends Lexer {
 	static { RuntimeMetaData.checkVersion("4.8", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -204,13 +204,13 @@ public class MySqlLangRuleLexer extends Lexer {
 	}
 
 
-	public MySqlLangRuleLexer(CharStream input) {
+	public DmlLangRuleLexer(CharStream input) {
 		super(input);
 		_interp = new LexerATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
 	@Override
-	public String getGrammarFileName() { return "MySqlLangRule.g4"; }
+	public String getGrammarFileName() { return "DmlLangRule.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }

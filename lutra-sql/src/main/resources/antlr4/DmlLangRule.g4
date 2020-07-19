@@ -1,17 +1,8 @@
-grammar MySqlLangRule;
+grammar DmlLangRule;
 
 import MySqlKeyWords, MySqlTypeKeyWords, Operators, BasicTypes;
 
-root: sqlStatement? EOF;
-
-sqlStatement:   ddlStatement
-              | dmlStatement
-              ;
-
-ddlStatement:   createStatement
-              | dropStatement
-              | truncateStatement
-              ;
+root: dmlStatement? EOF;
 
 dmlStatement:   selectStatement
               | insertStatement
@@ -19,86 +10,8 @@ dmlStatement:   selectStatement
               | deleteStatement
               ;
 
-createStatement: createTable ( ifNotExists )? tableName L_BRACKET
-                    createContent (COMMA createContent )*
-                R_BRACKET
-               ;
-
-createContent:   columnContent
-               | primaryKeyContent
-               | foreignKeyContent
-             ;
-
-createTable: CREATE TABLE
-           ;
-
-dropStatement: dropTable ifExists? tableName
-             ;
-
-dropTable: DROP TABLE
-         ;
-
-truncateStatement: truncateTable  tableName
-                 ;
-
-truncateTable: TRUNCATE TABLE
-             ;
-
-columnContent:   columnDefineStyle ( COMMA columnDefineStyle )*
-               ;
-
-columnDefineStyle:  ( columnName dataTypeContent ( columnDefParameters )* )+
-                    ;
-
-columnDefParameters:   notNull
-                     | AUTO_INCREMENT
-                     | primaryKey
-                     ;
-
-dataTypeContent:   dataType
-                 | dataType L_BRACKET number R_BRACKET
-                 ;
-
-primaryKey: PRIMARY KEY
-          ;
-
-primaryKeyContent: primaryKey L_BRACKET keys R_BRACKET
-                 ;
-
-keys: columnName ( COMMA columnName)*
-     ;
-
-foreignKeyContent:  foreignKeys ( COMMA foreignKeys )*
-                 ;
-
-foreignKeyIndex: INDEX innerName L_BRACKET columnName R_BRACKET usingBTree ;
-
-foreignKeys: CONSTRAINT innerName FOREIGN KEY L_BRACKET columnName R_BRACKET REFERENCES referenceTableName L_BRACKET foreignKeyName R_BRACKET foreignOnOpChange*
-           | foreignKeyIndex
-           ;
-
-foreignOnOpChange: ON ( DELETE | UPDATE  ) RESTRICT;
-
-dataType: TINYINT | SMALLINT | MEDIUMINT | INT | INTEGER |
-          BIGINT | REAL | DOUBLE | PRECISION | FLOAT | DECIMAL | DEC |
-          NUMERIC | DATE | TIME | TIMESTAMP | DATETIME |
-          YEAR | CHAR | VARCHAR | NVARCHAR | NATIONAL |
-          BINARY | VARBINARY | TINYBLOB | BLOB | MEDIUMBLOB |
-          LONGBLOB |TINYTEXT | TEXT | MEDIUMTEXT |
-          LONGTEXT | ENUM | VARYING | SERIAL
-          ;
-
 number: ( NUMBER )+ | ( S_QUOTE NUMBER S_QUOTE )+
       ;
-
-ifExists: IF EXISTS
-        ;
-
-ifNotExists: IF NOT EXISTS
-           ;
-
-notNull: NOT NULL
-       ;
 
 selectStatement: SELECT ( START | distinctExpr | selectColumnMulp | functionExpr ) FROM tableExpr ( conditionExpr )*
                ;
@@ -233,17 +146,6 @@ columnName: variableId
 
 columnAlias: ID F_STOP ( columnName | START )
            ;
-
-foreignKeyName: variableId
-              ;
-
-referenceTableName: variableId
-                  ;
-
-innerName: variableId
-         ;
-
-usingBTree: USING BTREE;
 
 tableName: variableId
          ;
