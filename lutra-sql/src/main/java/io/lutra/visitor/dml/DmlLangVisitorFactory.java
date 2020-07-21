@@ -1,6 +1,5 @@
 package io.lutra.visitor.dml;
 
-import io.lutra.visitor.dml.DmlLangRuleVisitor;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

@@ -1,9 +1,11 @@
 package io.lutra;
 
-import antlr4.MySqlLangRuleLexer;
-import antlr4.MySqlLangRuleParser;
 import io.lutra.common.CaseSensitiveCharStream;
+import io.lutra.parser.ddl.DdlLangRuleLexer;
+import io.lutra.parser.ddl.DdlLangRuleParser;
 import io.lutra.visitor.ddl.DdlLangVisitorFactory;
+import io.lutra.visitor.ddl.create.CreateLangVisitor;
+import io.lutra.visitor.ddl.create.pojo.LangStatementPayload;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -26,16 +28,13 @@ public class App
     public static void main( String[] args )
     {
         CharStream stream = CharStreams.fromString(SQL);
-        MySqlLangRuleLexer lexer  = new MySqlLangRuleLexer(new CaseSensitiveCharStream(stream,true));
+        DdlLangRuleLexer lexer  = new DdlLangRuleLexer(new CaseSensitiveCharStream(stream,true));
         CommonTokenStream tokenStream = new CommonTokenStream(lexer);
-        MySqlLangRuleParser parser = new MySqlLangRuleParser(tokenStream);
+        DdlLangRuleParser parser = new DdlLangRuleParser(tokenStream);
         ParseTree tree = parser.root();
-        DdlLangVisitorFactory factory = new DdlLangVisitorFactory();
         long startTime = System.currentTimeMillis();
-        for (int i=0;i<10000;i++) {
-            CreateStatementTableNameVisitor visitor = factory.newVisitor(CreateStatementTableNameVisitor.class);
-            visitor.visit(tree);
-        }
+        CreateLangVisitor visitor = DdlLangVisitorFactory.newVisitor(CreateLangVisitor.class,new LangStatementPayload());
+        tree.accept(visitor);
         long endTime = System.currentTimeMillis();
         System.out.println("Using:"+(endTime-startTime));
     }

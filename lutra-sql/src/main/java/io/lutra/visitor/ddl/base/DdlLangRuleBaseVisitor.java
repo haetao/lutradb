@@ -1,6 +1,6 @@
 // Generated from C:/workspace/lutradb/lutra-sql/src/main/resources/antlr4\DdlLangRule.g4 by ANTLR 4.8
 package io.lutra.visitor.ddl.base;
-import io.lutra.antlr4.DdlLangRuleParser;
+import io.lutra.parser.ddl.DdlLangRuleParser;
 import io.lutra.visitor.ddl.DdlLangRuleVisitor;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
@@ -230,11 +230,4 @@ public class DdlLangRuleBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitTableName(DdlLangRuleParser.TableNameContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitVariableId(DdlLangRuleParser.VariableIdContext ctx) { return visitChildren(ctx); }
 }

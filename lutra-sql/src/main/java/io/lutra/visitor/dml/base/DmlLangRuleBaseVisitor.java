@@ -1,6 +1,6 @@
 // Generated from C:/workspace/lutradb/lutra-sql/src/main/resources/antlr4\DmlLangRule.g4 by ANTLR 4.8
 package io.lutra.visitor.dml.base;
-import io.lutra.antlr4.DmlLangRuleParser;
+import io.lutra.parser.dml.DmlLangRuleParser;
 import io.lutra.visitor.dml.DmlLangRuleVisitor;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 

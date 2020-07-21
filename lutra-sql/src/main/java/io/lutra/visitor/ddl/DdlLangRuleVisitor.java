@@ -1,6 +1,6 @@
 // Generated from C:/workspace/lutradb/lutra-sql/src/main/resources/antlr4\DdlLangRule.g4 by ANTLR 4.8
 package io.lutra.visitor.ddl;
-import io.lutra.antlr4.DdlLangRuleParser;
+import io.lutra.parser.ddl.DdlLangRuleParser;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -197,10 +197,4 @@ public interface DdlLangRuleVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitTableName(DdlLangRuleParser.TableNameContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link DdlLangRuleParser#variableId}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitVariableId(DdlLangRuleParser.VariableIdContext ctx);
 }
