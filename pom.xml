@@ -14,6 +14,7 @@
     <module>lutra-server</module>
     <module>lutra-core</module>
     <module>lutra-common</module>
+    <module>lutra-sql-antlr4</module>
   </modules>
 
   <name>lutradb</name>
@@ -28,6 +29,7 @@
     <junit.version>4.11</junit.version>
     <guava.version>27.0.1-jre</guava.version>
     <lombok.version>1.18.8</lombok.version>
+    <calcite.version>1.21.0</calcite.version>
   </properties>
 
   <dependencies>
@@ -51,6 +53,11 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>${lombok.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.calcite</groupId>
+      <artifactId>calcite-core</artifactId>
+      <version>${calcite.version}</version>
     </dependency>
   </dependencies>
 
