@@ -1,8 +1,8 @@
 package io.lutra.antlr.visitor.ddl.create;
 
 import io.lutra.antlr.parser.ddl.DdlLangRuleParser;
-import io.lutra.antlr.visitor.ddl.create.pojo.*;
 import io.lutra.antlr.visitor.ddl.base.DdlLangRuleBaseVisitor;
+import io.lutra.sql.pojo.*;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -11,17 +11,17 @@ import java.util.List;
 public class CreateLangVisitor extends DdlLangRuleBaseVisitor<Void> {
 
     @Getter
-    private CreateLangStatementPayload statementPayload;
+    private final TableCreation statementPayload;
 
-    public CreateLangVisitor(CreateLangStatementPayload statementPayload) {
+    public CreateLangVisitor(TableCreation statementPayload) {
         this.statementPayload = statementPayload;
-        this.statementPayload.setColumnPayloads(new ArrayList<ColumnPayload>());
-        this.statementPayload.setForeignPayloads(new ArrayList<ForeignItemPayload>());
+        this.statementPayload.setColumnCreations(new ArrayList<ColumnCreation>());
+        this.statementPayload.setForeignPayloads(new ArrayList<ForeignItemCarrier>());
     }
 
     @Override
     public Void visitTableName(DdlLangRuleParser.TableNameContext ctx) {
-        statementPayload.setTableName(ctx.isEmpty()?null:ctx.getText());
+        statementPayload.setName(ctx.isEmpty()?null:ctx.getText());
         return visitChildren(ctx);
     }
 
@@ -41,7 +41,7 @@ public class CreateLangVisitor extends DdlLangRuleBaseVisitor<Void> {
     public Void visitPrimaryKeyContent(DdlLangRuleParser.PrimaryKeyContentContext ctx) {
         if((ctx != null ) && !ctx.isEmpty()) {
             String[] keys = ctx.keys().getText().split(",");
-            MultiplePrimaryKeysPayload primaryKeysPayload = new MultiplePrimaryKeysPayload();
+            MultiplePrimaryKeysCarrier primaryKeysPayload = new MultiplePrimaryKeysCarrier();
             primaryKeysPayload.setKeys(keys);
             statementPayload.setPrimaryKeysPayload(primaryKeysPayload);
         }
@@ -55,26 +55,33 @@ public class CreateLangVisitor extends DdlLangRuleBaseVisitor<Void> {
 
     private void parseColumnDefineStyle(DdlLangRuleParser.ColumnDefineStyleContext ctx){
         List<DdlLangRuleParser.ColumnNameContext> columnNameContexts = ctx.columnName();
-        ColumnPayload payload = new ColumnPayload();
+        ColumnCreation payload = new ColumnCreation();
         for(DdlLangRuleParser.ColumnNameContext each : columnNameContexts){
             String columnName = each.getText().replaceAll("`","");
-            payload.setColumnName(columnName);
+            payload.setName(columnName);
         }
-        payload.setDataTypePayload(new DataTypePayload());
+        payload.setDataTypeCarrier(new DataTypeCarrier());
         List<DdlLangRuleParser.DataTypeContentContext> dataTypeContentContexts = ctx.dataTypeContent();
         for(DdlLangRuleParser.DataTypeContentContext each : dataTypeContentContexts){
             String dataType = each.dataType().getText();
             int length = Integer.parseInt(each.number()==null?"0":each.number().getText());
-            payload.getDataTypePayload().setTypeName(dataType);
-            payload.getDataTypePayload().setDataLength(length);
+            payload.getDataTypeCarrier().setTypeName(dataType);
+            payload.getDataTypeCarrier().setDataLength(length);
         }
         List<DdlLangRuleParser.ColumnDefParametersContext> parametersContexts = ctx.columnDefParameters();
         for(DdlLangRuleParser.ColumnDefParametersContext each : parametersContexts){
-            payload.setNutNullSymbol(each.notNull() != null);
-            payload.setAutoIncrementSymbol(each.AUTO_INCREMENT()!=null);
-            payload.setPrimaryKeySymbol(each.primaryKey() != null);
+            if(each.notNull() != null){
+                payload.setNotNullSymbol(true);
+            }
+            if(each.AUTO_INCREMENT() != null){
+                payload.setAutoIncrementSymbol(true);
+            }
+            if(each.primaryKey() != null){
+                payload.setPrimaryKeySymbol(true);
+            }
         }
-        statementPayload.getColumnPayloads().add(payload);
+        payload.setBelongTable(statementPayload.getName());
+        statementPayload.getColumnCreations().add(payload);
     }
 
 }

@@ -1,14 +1,14 @@
-package io.lutra.antlr.visitor.ddl.create.pojo;
+package io.lutra.sql.pojo;
 
 import lombok.Data;
 
 /**
- * 2 * @Author: HunterWang
- * 3 * @Date: 2020/7/21 16:22
+ * @Author: HunterWang
+ * @Date: 2020/7/21 16:22
  * 4
  */
 @Data
-public class ForeignItemPayload {
+public class ForeignItemCarrier {
     private String innerColumnName;
     private String refColumnName;
     private String refTableName;
