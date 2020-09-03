@@ -1,12 +1,9 @@
 package io.lutra.antlr;
 
-import io.lutra.antlr.handlers.ParseCreateHandler;
-import io.lutra.sql.SqlPipeline;
-import io.lutra.sql.SqlWrapper;
-import io.lutra.sql.pojo.TableCreation;
-import io.lutra.sql.spi.SqlExecutorPlanGenerator;
-import io.lutra.sql.statement.SqlLangType;
-import io.lutra.sql.statement.StatementType;
+import io.lutra.pipeline.SqlWrapper;
+import io.lutra.pipeline.spi.SqlExecutionPlanGenerator;
+import io.lutra.pipeline.statement.SqlLangType;
+import io.lutra.pipeline.statement.StatementType;
 
 public class App {
     public static void main(String[] args) {
@@ -33,9 +30,9 @@ public class App {
                         ")";
             }
         };
-        SqlExecutorPlanGenerator generator = new SqlExecutorPlanGeneratorImpl();
+        SqlExecutionPlanGenerator generator = new SqlExecutionPlanGeneratorImpl();
         try {
-            generator.genExecutorPlan(wrapper);
+            generator.genExecutionPlan(wrapper);
         } catch (Exception e) {
             e.printStackTrace();
         }

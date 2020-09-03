@@ -1,6 +1,6 @@
 package io.lutra.antlr.visitor.ddl;
 
-import io.lutra.sql.pojo.TableCreation;
+import io.lutra.pipeline.pojo.TableCreation;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

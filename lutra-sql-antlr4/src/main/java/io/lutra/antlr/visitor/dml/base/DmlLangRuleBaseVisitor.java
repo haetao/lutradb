@@ -1,4 +1,4 @@
-// Generated from C:/workspace/lutradb/lutra-sql/src/main/resources/antlr4\DmlLangRule.g4 by ANTLR 4.8
+// Generated from C:/workspace/lutradb/lutra-converter/src/main/resources/antlr4\DmlLangRule.g4 by ANTLR 4.8
 package io.lutra.antlr.visitor.dml.base;
 import io.lutra.antlr.parser.dml.DmlLangRuleParser;
 import io.lutra.antlr.visitor.dml.DmlLangRuleVisitor;

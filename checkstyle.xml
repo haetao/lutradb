@@ -9,7 +9,7 @@
         names will be relative to the specified directory. See
         http://checkstyle.sourceforge.net/5.x/config.html#Checker
 
-        <property name="basedir" value="${basedir}"/>
+        <property name="basedir" handler="${basedir}"/>
     -->
 
     <!-- 检查每个包中是否有java注释文件，默认有package-info.java -->
@@ -23,7 +23,7 @@
 
     <!-- 文件长度不超过1500行 -->
     <module name="FileLength">
-        <property name="max" value="1500"/>
+        <property name="max" handler="1500"/>
     </module>
 
     <!-- 检查文件中是否含有'\t' -->
@@ -31,10 +31,10 @@
 
     <!-- Miscellaneous other checks. -->
     <module name="RegexpSingleline">
-        <property name="format" value="\s+$"/>
-        <property name="minimum" value="0"/>
-        <property name="maximum" value="0"/>
-        <property name="message" value="Line has trailing spaces."/>
+        <property name="format" handler="\s+$"/>
+        <property name="minimum" handler="0"/>
+        <property name="maximum" handler="0"/>
+        <property name="message" handler="Line has trailing spaces."/>
     </module>
 
 
@@ -45,7 +45,7 @@
         <!-- 注释检查 -->
         <!-- 检查方法和构造函数的javadoc -->
         <module name="JavadocMethod">
-            <property name="tokens" value="METHOD_DEF" />
+            <property name="tokens" handler="METHOD_DEF" />
 
         </module>
         <!-- 检查类和接口的javadoc。默认不检查author和version tags -->
@@ -54,7 +54,7 @@
         <module name="JavadocVariable"/>
         <!-- 检查javadoc的格式 -->
         <module name="JavadocStyle">
-            <property name="checkFirstSentence" value="false"/>
+            <property name="checkFirstSentence" handler="false"/>
         </module>
         <!-- 检查TODO:注释 -->
         <module name="TodoComment"/>
@@ -66,15 +66,15 @@
         <module name="LocalVariableName" />
         <!-- 包名的检查（只允许小写字母），默认^[a-z]+(\.[a-zA-Z_][a-zA-Z_0-9_]*)*$ -->
         <module name="PackageName">
-            <property name="format" value="^[a-z]+(\.[a-z][a-z0-9]*)*$" />
-            <message key="name.invalidPattern" value="包名 ''{0}'' 要符合 ''{1}''格式."/>
+            <property name="format" handler="^[a-z]+(\.[a-z][a-z0-9]*)*$" />
+            <message key="name.invalidPattern" handler="包名 ''{0}'' 要符合 ''{1}''格式."/>
         </module>
         <!-- 仅仅是static型的变量（不包括static final型）的检查 -->
         <module name="StaticVariableName" />
         <!-- Class或Interface名检查，默认^[A-Z][a-zA-Z0-9]*$-->
         <module name="TypeName">
-            <property name="severity" value="warning"/>
-            <message key="name.invalidPattern" value="名称 ''{0}'' 要符合 ''{1}''格式."/>
+            <property name="severity" handler="warning"/>
+            <message key="name.invalidPattern" handler="名称 ''{0}'' 要符合 ''{1}''格式."/>
         </module>
         <!-- 非static型变量的检查 -->
         <module name="MemberName" />
@@ -97,7 +97,7 @@
         <!-- Checks for Headers                                -->
         <!-- See http://checkstyle.sf.net/config_header.html   -->
         <!-- <module name="Header">                            -->
-        <!-- The follow property value demonstrates the ability     -->
+        <!-- The follow property handler demonstrates the ability     -->
         <!-- to have access to ANT properties. In this case it uses -->
         <!-- the ${basedir} property to allow Checkstyle to be run  -->
         <!-- from any directory within a project. See property      -->
@@ -105,7 +105,7 @@
         <!-- http://checkstyle.sf.net/config.html#properties        -->
         <!-- <property                                              -->
         <!--     name="headerFile"                                  -->
-        <!--     value="${basedir}/java.header"/>                   -->
+        <!--     handler="${basedir}/java.header"/>                   -->
         <!-- </module> -->
 
         <!-- Following interprets the header file as regular expressions. -->
@@ -125,18 +125,18 @@
         <!-- 长度检查 -->
         <!-- 每行不超过150个字符 -->
         <module name="LineLength">
-            <property name="max" value="150" />
+            <property name="max" handler="150" />
         </module>
         <!-- 方法不超过150行 -->
         <module name="MethodLength">
-            <property name="tokens" value="METHOD_DEF" />
-            <property name="max" value="150" />
+            <property name="tokens" handler="METHOD_DEF" />
+            <property name="max" handler="150" />
         </module>
         <!-- 方法的参数个数不超过5个。 并且不对构造方法进行检查-->
         <module name="ParameterNumber">
-            <property name="max" value="10" />
-            <property name="ignoreOverriddenMethods" value="true"/>
-            <property name="tokens" value="METHOD_DEF" />
+            <property name="max" handler="10" />
+            <property name="ignoreOverriddenMethods" handler="true"/>
+            <property name="tokens" handler="METHOD_DEF" />
         </module>
 
         <!-- 空格检查-->
@@ -191,7 +191,7 @@
         <module name="EqualsHashCode"/>
         <!-- 检查局部变量或参数是否隐藏了类中的变量 -->
         <module name="HiddenField">
-            <property name="tokens" value="VARIABLE_DEF"/>
+            <property name="tokens" handler="VARIABLE_DEF"/>
         </module>
         <!-- 检查是否使用工厂方法实例化 -->
         <module name="IllegalInstantiation"/>
@@ -199,8 +199,8 @@
         <module name="InnerAssignment"/>
         <!-- 检查是否有"魔术"数字 -->
         <module name="MagicNumber">
-            <property name="ignoreNumbers" value="0, 1"/>
-            <property name="ignoreAnnotation" value="true"/>
+            <property name="ignoreNumbers" handler="0, 1"/>
+            <property name="ignoreAnnotation" handler="true"/>
         </module>
         <!-- 检查switch语句是否有default -->
         <module name="MissingSwitchDefault"/>
@@ -225,20 +225,20 @@
         <!-- 其他检查 -->
         <!-- 文件中使用了System.out.print等
         <module name="GenericIllegalRegexp">
-            <property name="format" value="System\.out\.print"/>
+            <property name="format" handler="System\.out\.print"/>
         </module>
         <module name="GenericIllegalRegexp">
-            <property name="format" value="System\.exit"/>
+            <property name="format" handler="System\.exit"/>
         </module>
         <module name="GenericIllegalRegexp">
-            <property name="format" value="printStackTrace"/>
+            <property name="format" handler="printStackTrace"/>
         </module>-->
 
 
         <!-- 代码质量 -->
         <!-- 圈复杂度
         <module name="CyclomaticComplexity">
-              <property name="max" value="2"/>
+              <property name="max" handler="2"/>
         </module> -->
     </module>
 
