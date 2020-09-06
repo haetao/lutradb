@@ -6,16 +6,21 @@ import io.lutra.common.converter.ConverterChain;
 import io.lutra.common.filter.FilterChain;
 import io.lutra.common.interceptor.Interceptor;
 import io.lutra.common.converter.Converter;
+import io.lutra.common.interceptor.InterceptorChain;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @Author: wanght_oup_cq
  * @Date: 2020/9/2
  * @Description:
  */
+@Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class LutraChain {
 
@@ -37,12 +42,14 @@ public final class LutraChain {
         }
     }
 
+
     static class InnerFilterChain<T> implements FilterChain<T>{
 
         private final LinkedList<Filter<T>> filters;
 
-        private InnerFilterChain(){
+        private InnerFilterChain(Filter<T> filter){
             filters = Lists.newLinkedList();
+            addFilterToFirst(filter);
         }
 
         @Override
@@ -64,16 +71,41 @@ public final class LutraChain {
         }
     }
 
+    static class InnerInterceptorChain<T> implements InterceptorChain<T>{
+
+        private final List<Interceptor<T>> interceptors;
+
+        private InnerInterceptorChain(Interceptor<T> interceptor){
+            interceptors = Lists.newLinkedList();
+            addInterceptor(interceptor);
+        }
+
+        @Override
+        public void addInterceptor(Interceptor<T> interceptor) {
+            interceptors.add(interceptor);
+        }
+
+        @Override
+        public boolean intercept(T obj) {
+            for(Interceptor<T> interceptor : interceptors){
+                if(!interceptor.doIntercept(obj)){
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
     public static<I,O> ConverterChain<I,O> newConverterChain(Converter<I, O> converter){
         return new InnerConverterChain<>(converter);
     }
 
-    public static<T> FilterChain<T> newFilterChain(){
-        return new InnerFilterChain<>();
+    public static<T> FilterChain<T> newFilterChain(Filter<T> filter){
+        return new InnerFilterChain<>(filter);
     }
 
-    public static Interceptor newInterceptorChain(){
-        return null;
+    public static<T> InterceptorChain<T> newInterceptorChain(Interceptor<T> interceptor){
+        return new InnerInterceptorChain<>(interceptor);
     }
 
 }

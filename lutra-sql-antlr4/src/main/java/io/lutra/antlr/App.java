@@ -1,9 +1,9 @@
 package io.lutra.antlr;
 
-import io.lutra.pipeline.SqlWrapper;
-import io.lutra.pipeline.spi.SqlExecutionPlanGenerator;
-import io.lutra.pipeline.statement.SqlLangType;
-import io.lutra.pipeline.statement.StatementType;
+import io.lutra.sql.SqlWrapper;
+import io.lutra.sql.spi.SqlExecutionPlanGenerator;
+import io.lutra.sql.statement.SqlLangType;
+import io.lutra.sql.statement.StatementType;
 
 public class App {
     public static void main(String[] args) {

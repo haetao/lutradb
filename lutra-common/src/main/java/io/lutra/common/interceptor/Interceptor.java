@@ -6,5 +6,6 @@ package io.lutra.common.interceptor;
  * @Date: 2020/8/31
  * @Description:
  */
-public interface Interceptor {
+public interface Interceptor<T> {
+    boolean doIntercept(T obj);
 }

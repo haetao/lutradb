@@ -4,9 +4,9 @@ import io.lutra.antlr.handlers.CreateParsingConverter;
 import io.lutra.antlr.handlers.CreateVerifyConverter;
 import io.lutra.common.LutraChain;
 import io.lutra.common.converter.ConverterChain;
-import io.lutra.pipeline.SqlExecutionPlan;
-import io.lutra.pipeline.SqlWrapper;
-import io.lutra.pipeline.spi.SqlExecutionPlanGenerator;
+import io.lutra.sql.SqlExecutionPlan;
+import io.lutra.sql.SqlWrapper;
+import io.lutra.sql.spi.SqlExecutionPlanGenerator;
 
 public class SqlExecutionPlanGeneratorImpl implements SqlExecutionPlanGenerator {
     @Override
@@ -84,8 +84,6 @@ public class SqlExecutionPlanGeneratorImpl implements SqlExecutionPlanGenerator 
     private SqlExecutionPlan genCreateExecutionPlan(String sql){
         ConverterChain<String,SqlExecutionPlan> planConverterChain = LutraChain.newConverterChain(new CreateParsingConverter())
                 .addConverter(new CreateVerifyConverter());
-        LutraChain.newFilterChain()
-                .addFilterToLast(obj->"");
 
         return planConverterChain.submit(sql);
     }
