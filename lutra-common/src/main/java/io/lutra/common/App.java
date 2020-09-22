@@ -1,5 +1,4 @@
 package io.lutra.common;
-
 import io.lutra.common.util.RegexUtil;
 
 import java.awt.*;
