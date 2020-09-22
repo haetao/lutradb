@@ -4,7 +4,7 @@ import io.lutra.antlr.ParseTreeFactory;
 import io.lutra.antlr.visitor.ddl.DdlLangVisitorFactory;
 import io.lutra.antlr.visitor.ddl.create.CreateLangVisitor;
 import io.lutra.common.converter.Converter;
-import io.lutra.pipeline.pojo.TableCreation;
+import io.lutra.sql.pojo.TableCreation;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 public class CreateParsingConverter implements Converter<String, TableCreation> {

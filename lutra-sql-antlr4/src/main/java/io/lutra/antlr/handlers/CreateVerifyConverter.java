@@ -1,8 +1,8 @@
 package io.lutra.antlr.handlers;
 
 import io.lutra.common.converter.Converter;
-import io.lutra.pipeline.SqlExecutionPlan;
-import io.lutra.pipeline.pojo.TableCreation;
+import io.lutra.sql.SqlExecutionPlan;
+import io.lutra.sql.pojo.TableCreation;
 
 public class CreateVerifyConverter implements Converter<TableCreation, SqlExecutionPlan> {
 

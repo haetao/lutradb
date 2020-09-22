@@ -23,13 +23,15 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
     <antlr4.version>4.8</antlr4.version>
     <junit.version>4.11</junit.version>
     <guava.version>27.0.1-jre</guava.version>
     <lombok.version>1.18.8</lombok.version>
     <calcite.version>1.21.0</calcite.version>
+    <rocksdb.version>6.11.4</rocksdb.version>
+    <netty.version>4.1.51.Final</netty.version>
   </properties>
 
   <dependencies>
@@ -40,11 +42,6 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-       <groupId>org.antlr</groupId>
-       <artifactId>antlr4-runtime</artifactId>
-       <version>${antlr4.version}</version>
-    </dependency>
-    <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
       <version>${guava.version}</version>
@@ -53,11 +50,6 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>${lombok.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.calcite</groupId>
-      <artifactId>calcite-core</artifactId>
-      <version>${calcite.version}</version>
     </dependency>
   </dependencies>
 

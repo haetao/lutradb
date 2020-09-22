@@ -2,7 +2,7 @@ package io.lutra.antlr.visitor.ddl.create;
 
 import io.lutra.antlr.parser.ddl.DdlLangRuleParser;
 import io.lutra.antlr.visitor.ddl.base.DdlLangRuleBaseVisitor;
-import io.lutra.pipeline.pojo.*;
+import io.lutra.sql.pojo.*;
 import lombok.Getter;
 
 import java.util.ArrayList;
