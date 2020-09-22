@@ -20,7 +20,6 @@ import java.util.List;
  * @Date: 2020/9/2
  * @Description:
  */
-@Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class LutraChain {
 
