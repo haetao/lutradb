@@ -3,7 +3,7 @@ package io.lutra.common.proxy;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 
-public class CGlibDynamicProxyFactory<T> implements ProxyFactory<T>{
+class CGlibDynamicProxyFactory<T> implements ProxyFactory<T>{
     private final Class<T> cl;
 
     private final MethodInterceptor interceptor;

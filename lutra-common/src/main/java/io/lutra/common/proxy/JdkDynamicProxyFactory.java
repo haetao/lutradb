@@ -3,7 +3,7 @@ package io.lutra.common.proxy;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
 
-public class JdkDynamicProxyFactory<T> implements ProxyFactory<T> {
+class JdkDynamicProxyFactory<T> implements ProxyFactory<T> {
 
     private final T obj;
 

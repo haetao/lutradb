@@ -22,6 +22,8 @@ public class Bootstrap implements Server {
 
     private final ServerBootstrap serverBootstrap;
 
+    private ChannelFuture future;
+
     public Bootstrap() {
         boss = new NioEventLoopGroup(1);
         workers = new NioEventLoopGroup();
@@ -49,7 +51,7 @@ public class Bootstrap implements Server {
     @Override
     public void startUp() {
         try {
-            ChannelFuture future = serverBootstrap.bind(port).sync();
+            future = serverBootstrap.bind(port).sync();
             future.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             e.printStackTrace();
