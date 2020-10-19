@@ -1,5 +1,10 @@
 package io.lutra.protocol;
 
+import io.lutra.server.mysql.ErrPacketHandler;
+import io.lutra.server.mysql.OkPacketHandler;
+import io.lutra.server.mysql.packet.MySqlPayload;
+import io.lutra.server.mysql.packet.OkPayload;
+
 import java.util.*;
 
 /**
@@ -10,8 +15,7 @@ public class App
 {
     public static void main( String[] args )
     {
-        String[] arr = {"fix","fix","fi"};
-        System.out.println(longestCommonPrefix(arr));
+
     }
 
     private static int reverse(int x) {

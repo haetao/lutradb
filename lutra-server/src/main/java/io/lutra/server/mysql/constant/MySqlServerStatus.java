@@ -1,4 +1,4 @@
-package io.lutra.protocol.mysql.common;
+package io.lutra.server.mysql.constant;
 
 import lombok.Getter;
 
@@ -30,7 +30,7 @@ public enum  MySqlServerStatus {
      SERVER_SESSION_STATE_CHANGED ( 0x4000);
 
      @Getter
-     private int code;
+     private final int code;
 
     MySqlServerStatus(int code) {
         this.code = code;

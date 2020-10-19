@@ -4,17 +4,11 @@ import com.google.common.collect.Lists;
 import io.lutra.common.filter.Filter;
 import io.lutra.common.converter.ConverterChain;
 import io.lutra.common.filter.FilterChain;
-import io.lutra.common.interceptor.Interceptor;
 import io.lutra.common.converter.Converter;
-import io.lutra.common.interceptor.InterceptorChain;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
 import java.util.LinkedList;
-import java.util.List;
-
 /**
  * @Author: wanght_oup_cq
  * @Date: 2020/9/2
@@ -52,13 +46,15 @@ public final class LutraChain {
         }
 
         @Override
-        public void addFilterToFirst(Filter<T> filter) {
+        public FilterChain<T> addFilterToFirst(Filter<T> filter) {
             filters.addFirst(filter);
+            return this;
         }
 
         @Override
-        public void addFilterToLast(Filter<T> filter) {
+        public FilterChain<T> addFilterToLast(Filter<T> filter) {
             filters.addLast(filter);
+            return this;
         }
 
         @Override
@@ -70,31 +66,6 @@ public final class LutraChain {
         }
     }
 
-    static class InnerInterceptorChain<T> implements InterceptorChain<T>{
-
-        private final List<Interceptor<T>> interceptors;
-
-        private InnerInterceptorChain(Interceptor<T> interceptor){
-            interceptors = Lists.newLinkedList();
-            addInterceptor(interceptor);
-        }
-
-        @Override
-        public void addInterceptor(Interceptor<T> interceptor) {
-            interceptors.add(interceptor);
-        }
-
-        @Override
-        public boolean intercept(T obj) {
-            for(Interceptor<T> interceptor : interceptors){
-                if(!interceptor.doIntercept(obj)){
-                    return false;
-                }
-            }
-            return true;
-        }
-    }
-
     public static<I,O> ConverterChain<I,O> newConverterChain(Converter<I, O> converter){
         return new InnerConverterChain<>(converter);
     }
@@ -102,9 +73,4 @@ public final class LutraChain {
     public static<T> FilterChain<T> newFilterChain(Filter<T> filter){
         return new InnerFilterChain<>(filter);
     }
-
-    public static<T> InterceptorChain<T> newInterceptorChain(Interceptor<T> interceptor){
-        return new InnerInterceptorChain<>(interceptor);
-    }
-
 }

@@ -1,4 +1,4 @@
-package io.lutra.protocol.mysql.common;
+package io.lutra.server.mysql.constant;
 
 import lombok.Getter;
 
@@ -7,7 +7,7 @@ import lombok.Getter;
  * @De: 2020/9/20
  * @Description:
  */
-public enum MySqlCommandType {
+public enum MySqlClientCommandType {
      COM_SLEEP (0x00),  //内部线程状态
      COM_QUIT (0x01), //关闭连接
      COM_INIT_DB (0x02), //切换数据库
@@ -38,9 +38,9 @@ public enum MySqlCommandType {
      COM_STMT_FETCH (0x1C);//获取预处理语句的执行结果
 
     @Getter
-    private int code;
+    private final int code;
 
-    MySqlCommandType(int code) {
+    MySqlClientCommandType(int code) {
         this.code = code;
     }
 }

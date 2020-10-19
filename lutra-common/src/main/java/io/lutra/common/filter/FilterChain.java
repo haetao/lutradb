@@ -6,7 +6,7 @@ package io.lutra.common.filter;
  * @Description:
  */
 public interface FilterChain<T> {
-    void addFilterToFirst(Filter<T> filter);
-    void addFilterToLast(Filter<T> filter);
+    FilterChain<T> addFilterToFirst(Filter<T> filter);
+    FilterChain<T> addFilterToLast(Filter<T> filter);
     T doFilter(T obj);
 }
